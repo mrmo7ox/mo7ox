@@ -11,22 +11,32 @@
 
 ?>
 
-	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'mo7ox' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'mo7ox' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'mo7ox' ), 'mo7ox', '<a href="http://underscores.me/">Underscores.me</a>' );
-				?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
+	<footer class=" flex justify-center  items-center bg-[#141418] w-full h-[250px]">
+		<div class="w-[75%] grid grid-cols-3">
+			<div class=" text-white flex gap-4 flex-col justify-between items-start Poppins h-[90%] ">
+				<h1 class=""><i class="text-[#FF9500] fa-brands fa-web-awesome"></i> <?php echo esc_html(get_the_author_meta('login', 1));?></h1>
+				<p class="text-[12px] w-[20ch]"><?php
+					echo esc_html(get_the_author_meta('description', 1));
+					?></p>
+				</div>
+				<div class="flex flex-col justify-between items-center">
+					<span class=" Poppins text-white"><i class="fa-solid fa-link"></i> Links</span>
+					<?php wp_nav_menu(array(
+						'theme_location' => 'main-menu', 
+						'container' => 'nav', 
+						'menu_class' => 'visited:text-white links', 
+
+					)); ?>
+
+				</div>
+				<div class="flex flex-col justify-center items-center">
+						<div class="Poppins text-white">Follow me</div>
+						<div><?php mo7ox_display_social_links(); ?></div>
+					
+				</div>
+			</div>
+	</footer>
+</div>
 
 <?php wp_footer(); ?>
 
