@@ -1,5 +1,5 @@
 body {
-    background-color: #121213;
+    background-color: #0C0C10;
 }
 
 .Poppins{
@@ -56,20 +56,66 @@ nav.links  {
 .swiper {
     width: 100%;
     height: 100%;
-  }
+}
 
-  .swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.swiper-slide {
+text-align: center;
+font-size: 18px;
+display: flex;
+justify-content: center;
+align-items: center;
+}
 
-  .swiper-slide img {
+.course-thumbnail img
+{
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
+    border-radius: 5px;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+}
+#img_slider
+{
+    border-radius: 5px;
+
+}
+
+#tool_holder img
+{
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+}
+
+#ctf_holder img
+{
+    border-radius: 10px;
+    height: 200px;
+    object-fit: cover;
+}
+#blog_holder img
+{
+    border-radius: 10px;
+    height: 300px;
+    object-fit: cover;
+}
+
+#post_fire {
+    width: 100%;
+    height: 100%;
+    
+}
+#post_fire img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}

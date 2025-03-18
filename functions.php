@@ -574,3 +574,210 @@ function mo7ox_display_course_details() {
         echo '<p>No course details found.</p>';
     endif;
 }
+
+// making for tools too
+function mo7ox_register_tools_post_type() {
+    // Courses Post Type
+    $labels_Tools = array(
+        'name'                  => _x('Tools', 'Post Type General Name', 'mo7ox'),
+        'singular_name'         => _x('Tool', 'Post Type Singular Name', 'mo7ox'),
+        'menu_name'             => __('Tools', 'mo7ox'),
+        'name_admin_bar'        => __('Tool', 'mo7ox'),
+        'add_new'               => __('Add New', 'mo7ox'),
+        'add_new_item'          => __('Add New Tool', 'mo7ox'),
+        'new_item'              => __('New Tool', 'mo7ox'),
+        'edit_item'             => __('Edit Tool', 'mo7ox'),
+        'view_item'             => __('View Tool', 'mo7ox'),
+        'all_items'             => __('All Tools', 'mo7ox'),
+        'search_items'          => __('Search Tools', 'mo7ox'),
+        'not_found'             => __('No Tools found', 'mo7ox'),
+        'not_found_in_trash'    => __('No Tools found in Trash', 'mo7ox'),
+    );
+
+    $args_Tools = array(
+        'label'                 => __('Tools', 'mo7ox'),
+        'description'           => __('Custom post type for Tools', 'mo7ox'),
+        'labels'                => $labels_Tools,
+        'supports'              => array('title', 'thumbnail', 'editor'),
+        'public'                => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 5,
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => true,
+        'can_export'            => true,
+        'has_archive'           => true,
+        'hierarchical'          => false,
+        'exclude_from_search'   => false,
+        'capability_type'       => 'post',
+    );
+
+    register_post_type('Tools', $args_Tools);
+
+    
+
+    register_post_type('Tool_details', $args_details);
+}
+add_action('init', 'mo7ox_register_Tools_post_type');
+
+
+
+
+
+
+
+
+
+
+
+
+// ctfs Post Type
+
+function mo7ox_register_Ctfs_post_type() {
+    // Ctfs Post Type
+    $labels_Ctfs = array(
+        'name'                  => _x('Ctfs', 'Post Type General Name', 'mo7ox'),
+        'singular_name'         => _x('Ctf', 'Post Type Singular Name', 'mo7ox'),
+        'menu_name'             => __('Ctfs', 'mo7ox'),
+        'name_admin_bar'        => __('Ctf', 'mo7ox'),
+        'add_new'               => __('Add New', 'mo7ox'),
+        'add_new_item'          => __('Add New Ctf', 'mo7ox'),
+        'new_item'              => __('New Ctf', 'mo7ox'),
+        'edit_item'             => __('Edit Ctf', 'mo7ox'),
+        'view_item'             => __('View Ctf', 'mo7ox'),
+        'all_items'             => __('All Ctfs', 'mo7ox'),
+        'search_items'          => __('Search Ctfs', 'mo7ox'),
+        'not_found'             => __('No Ctfs found', 'mo7ox'),
+        'not_found_in_trash'    => __('No Ctfs found in Trash', 'mo7ox'),
+    );
+
+    $args_Ctfs = array(
+        'label'                 => __('Ctfs', 'mo7ox'),
+        'description'           => __('Custom post type for Ctfs', 'mo7ox'),
+        'labels'                => $labels_Ctfs,
+        'supports'              => array('title', 'thumbnail'),
+        'public'                => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 7,
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => true,
+        'can_export'            => true,
+        'has_archive'           => true,
+        'hierarchical'          => false,
+        'exclude_from_search'   => false,
+        'capability_type'       => 'post',
+    );
+
+    register_post_type('Ctfs', $args_Ctfs);
+
+    // Ctf Details Post Type
+    $labels_details = array(
+        'name'                  => _x('Ctf Details', 'Post Type General Name', 'mo7ox'),
+        'singular_name'         => _x('Ctf Detail', 'Post Type Singular Name', 'mo7ox'),
+        'menu_name'             => __('Ctf Details', 'mo7ox'),
+        'name_admin_bar'        => __('Ctf Detail', 'mo7ox'),
+        'add_new'               => __('Add New', 'mo7ox'),
+        'add_new_item'          => __('Add New Ctf Detail', 'mo7ox'),
+        'new_item'              => __('New Ctf Detail', 'mo7ox'),
+        'edit_item'             => __('Edit Ctf Detail', 'mo7ox'),
+        'view_item'             => __('View Ctf Detail', 'mo7ox'),
+        'all_items'             => __('All Ctf Details', 'mo7ox'),
+        'search_items'          => __('Search Ctf Details', 'mo7ox'),
+        'not_found'             => __('No Ctf details found', 'mo7ox'),
+        'not_found_in_trash'    => __('No Ctf details found in Trash', 'mo7ox'),
+    );
+
+    $args_details = array(
+        'label'                 => __('Ctf Details', 'mo7ox'),
+        'description'           => __('Custom post type for Ctf details', 'mo7ox'),
+        'labels'                => $labels_details,
+        'supports'              => array('title', 'editor', 'thumbnail'),
+        'public'                => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 8,
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => true,
+        'can_export'            => true,
+        'has_archive'           => true,
+        'hierarchical'          => false,
+        'exclude_from_search'   => false,
+        'capability_type'       => 'post',
+    );
+
+    register_post_type('Ctf_details', $args_details);
+}
+add_action('init', 'mo7ox_register_Ctfs_post_type');
+
+
+// ----------------------
+// ADD Ctf SELECTION FIELD TO Ctf DETAILS
+// ----------------------
+function mo7ox_add_Ctf_selection_metabox() {
+    add_meta_box(
+        'mo7ox_Ctf_selection',
+        'Select Ctf',
+        'mo7ox_Ctf_selection_callback',
+        'Ctf_details',
+        'side',
+        'default'
+    );
+}
+add_action('add_meta_boxes', 'mo7ox_add_Ctf_selection_metabox');
+
+function mo7ox_Ctf_selection_callback($post) {
+    $selected_Ctf = get_post_meta($post->ID, '_mo7ox_selected_Ctf', true);
+    $Ctfs = get_posts(array('post_type' => 'Ctfs', 'numberposts' => -1));
+
+    echo '<label for="mo7ox_selected_Ctf">Select Ctf:</label><br>';
+    echo '<select id="mo7ox_selected_Ctf" name="mo7ox_selected_Ctf">';
+    foreach ($Ctfs as $Ctf) {
+        echo '<option value="' . $Ctf->ID . '" ' . selected($selected_Ctf, $Ctf->ID, false) . '>' . esc_html($Ctf->post_title) . '</option>';
+    }
+    echo '</select>';
+}
+
+function mo7ox_save_Ctf_selection($post_id) {
+    if (isset($_POST['mo7ox_selected_Ctf'])) {
+        update_post_meta($post_id, '_mo7ox_selected_Ctf', sanitize_text_field($_POST['mo7ox_selected_Ctf']));
+    }
+}
+add_action('save_post', 'mo7ox_save_Ctf_selection');
+
+
+
+// 2️⃣ Add Custom Meta Boxes for Ctf Details
+function mo7ox_add_Ctf_details_meta_boxes() {
+
+    add_meta_box(
+        'mo7ox_Ctf_selector',
+        __('Select Ctf', 'mo7ox'),
+        'mo7ox_Ctf_selector_callback',
+        'Ctf_details',
+        'side',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'mo7ox_add_Ctf_details_meta_boxes');
+// Callback for Ctf Selector Meta Box
+function mo7ox_Ctf_selector_callback($post) {
+    $Ctfs = get_posts(array('post_type' => 'Ctfs', 'numberposts' => -1));
+    $selected_Ctf = get_post_meta($post->ID, '_mo7ox_selected_Ctf', true);
+    ?>
+    <label for="mo7ox_selected_Ctf"><?php _e('Select a Ctf:', 'mo7ox'); ?></label>
+    <select id="mo7ox_selected_Ctf" name="mo7ox_selected_Ctf" style="width: 100%;">
+        <option value=""><?php _e('Select a Ctf', 'mo7ox'); ?></option>
+        <?php foreach ($Ctfs as $Ctf) : ?>
+            <option value="<?php echo esc_attr($Ctf->ID); ?>" <?php selected($selected_Ctf, $Ctf->ID); ?>>
+                <?php echo esc_html($Ctf->post_title); ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    <?php
+}
+
+// Save the Custom Fields for Ctf Details
+function mo7ox_save_Ctf_details_meta($post_id) {
+    if (array_key_exists('mo7ox_selected_Ctf', $_POST)) {
+        update_post_meta($post_id, '_mo7ox_selected_Ctf', sanitize_text_field($_POST['mo7ox_selected_Ctf']));
+    }
+}
+add_action('save_post', 'mo7ox_save_Ctf_details_meta');
