@@ -12,8 +12,8 @@ $posts_query = new WP_Query($args_posts);
 
 ?>
 <main class="w-full flex justify-center items-center my-8">
-    <div class="w-[90%] flex justify-start items-start gap-8">
-        <div class="w-[30%] flex flex-col">
+    <div class="w-[90%]  flex md:flex-row flex-col-reverse justify-start items-start gap-8">
+        <div class="md:w-[30%] w-[100%] flex flex-col">
             <div class="flex justify-start items-center p-4  h-[110px]">
                 <div class="shadow-2xl flex justify-center items-center text-center bg-red-500 Poppins w-full rounded-full  gap-1 text-white p-4">
                     <span class=" w-full  rounded-xl"> <i class="fa-solid fa-fire"></i> NEW!!</span>
@@ -50,7 +50,7 @@ $posts_query = new WP_Query($args_posts);
             </div>
         
         </div>
-        <div class="w-[70%] ">  
+        <div class="md:w-[70%] w-[100%] ">  
              <!-- title -->
             <div class="shadow-xl p-4 bg-[#141418] Poppins w-full rounded-xl flex gap-4 h-[110px]">
                 <div id="bcamp_details" class="w-[110px] h-full"><?php the_post_thumbnail(); ?></div>

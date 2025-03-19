@@ -15,8 +15,13 @@
  get_header();
 ?>
 
+<div class="w-full flex justify-center items-center mt-8">
+  <span class="Poppins flex justify-start items-center w-[90%]">
+    <h1 class="text-red-600 text-[25px]"> <i class="fa-solid fa-fire"></i> NEW!!</h1>
+  </span>
+</div>
 
-<div class="w-full flex justify-center items-center mt-8 mb-12 h-[300px]">
+<div class="w-full flex justify-center items-center mt-4 mb-12 md:h-[300px]">
   <?php
 $args_posts = array(
     'post_type'      => 'post',
@@ -45,7 +50,7 @@ if ($posts_query->have_posts()) {
         $count++;
     }
 ?>
-<div class="grid grid-cols-3 grid-rows-2 gap-4 w-[90%] h-full">
+<div class=" md:grid grid-cols-3 flex-col flex justify-center items-center grid-rows-2 gap-4 w-[90%] h-full">
     <a href="<?php echo $posts[0]['link']; ?>" id="post_fire" class="vissted:text-white row-span-2 relative">
         <?php echo $posts[0]['img']; ?>
         <div class="absolute w-full h-full top-0 flex flex-col justify-center items-center" >
@@ -172,16 +177,20 @@ wp_reset_postdata();
         prevEl: ".swiper-button-prev",
       },
       breakpoints: {
-        640: {
+        600: {
           slidesPerView: 2,
           spaceBetween: 15,
         },
-        768: {
+        800: {
           slidesPerView: 4,
           spaceBetween: 15,
         },
-        1024: {
-          slidesPerView: 6,
+        1700: {
+          slidesPerView: 7,
+          spaceBetween: 15,
+        },
+        2300: {
+          slidesPerView: 10,
           spaceBetween: 15,
         },
       },
@@ -192,12 +201,49 @@ wp_reset_postdata();
 
 <div class="w-full flex justify-center items-center">
   <span class="Poppins flex justify-start items-center w-[75%]">
+    <h1 class="text-white text-[25px]"> <i class="fa-solid fa-compass"></i> Boot Camps</h1>
+  </span>
+</div>
+<!-- // Boot -->
+<div class="w-full flex justify-center items-center md:h-[200px] my-6">
+  <div class="w-[75%] h-full grid  min-[2400px]:grid-cols-10  min-[1700px]:grid-cols-6 min-[1000px]:grid-cols-4 min-[800px]:grid-cols-3 grid-cols-2 gap-5">
+    <?php
+    $args_courses = array(
+        'post_type'      => 'Bcamps',
+        'posts_per_page' => 5,  
+        'orderby'        => 'date', 
+        'order'          => 'DESC' 
+    );
+    $courses_query = new WP_Query($args_courses);
+    if ($courses_query->have_posts()) :
+    ?>
+            <?php while ($courses_query->have_posts()) : $courses_query->the_post(); ?>      
+              <div class="md:h-[200px]">
+                <?php if (has_post_thumbnail()) : ?>
+                  <a id="ctf_holder" href="<?php the_permalink(); ?>" class="h-[200px] h-full shadow-xl hover:scale-[0.97]  duration-200 transtion-all bg-[#222229] rounded-md w-full h-full justify-center items-center flex">
+                    <?php the_post_thumbnail(); ?>                    
+                  </a>
+                <?php endif; ?>
+              </div>
+            <?php endwhile; ?>
+          </div>
+    <?php
+        wp_reset_postdata();
+    else :
+        echo '<p>' . esc_html__('No courses found.', 'mo7ox') . '</p>';
+    endif;
+    ?>
+  </div>
+</div>
+
+<div class="w-full flex justify-center items-center">
+  <span class="Poppins flex justify-start items-center w-[75%]">
     <h1 class="text-white text-[25px]"> <i class="fa-solid fa-gamepad"></i> CTF's</h1>
   </span>
 </div>
 <!-- // ctfs -->
-<div class="w-full flex justify-center items-center h-[200px] my-6">
-  <div class="w-[75%] h-full grid grid-cols-5 gap-5">
+<div class="w-full flex justify-center items-center md:h-[200px] my-6 ">
+  <div class="w-[75%] h-full grid min-[2400px]:grid-cols-10  min-[1700px]:grid-cols-6 min-[1000px]:grid-cols-4 min-[800px]:grid-cols-3 grid-cols-2 gap-5">
     <?php
     $args_courses = array(
         'post_type'      => 'Ctfs',
@@ -235,7 +281,7 @@ wp_reset_postdata();
 
 <!-- tools -->
 <div class="w-full flex justify-center items-center  my-6">
-  <div class="w-[75%] h-full grid grid-cols-5 gap-5">
+  <div class="w-[75%] h-full grid min-[2400px]:grid-cols-10  min-[1700px]:grid-cols-6 min-[1000px]:grid-cols-4 min-[800px]:grid-cols-3 grid-cols-2 gap-5">
     <?php
     $args_courses = array(
         'post_type'      => 'Tools',

@@ -9,13 +9,13 @@ get_header();
 <div class="w-full mt-4 flex justify-center items-center">
     <span class="Poppins flex justify-center items-center w-[90%]">
         <h1 class="text-center text-white text-[25px]">
-            <i class="fa-solid fa-gamepad"></i> CTF's
+            <i class="fa-solid fa-gamepad"></i> BOOT CAMPS
         </h1>
     </span>
 </div>
 
-<main class="container w-full flex justify-center items-center my-4 flex-col">
-    <div class="course-list grid grid-cols-6 w-[80%] gap-5">
+<main class="w-full flex justify-center items-center my-4 flex-col">
+    <div class="course-list grid  min-[2400px]:grid-cols-8  min-[1700px]:grid-cols-6 min-[1000px]:grid-cols-4 min-[800px]:grid-cols-3 grid-cols-2 w-[80%] gap-5">
         <?php
         // Get the current page number
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
@@ -36,7 +36,7 @@ get_header();
                 }
         ?>
                 <div class="course-item">
-                    <a id="ctf_holder" href="<?php the_permalink(); ?>" class="h-[200px] h-full shadow-xl hover:scale-[0.97]  duration-200 transtion-all bg-[#222229] rounded-md w-full h-full justify-center items-center flex">
+                    <a id="ctf_holder" href="<?php the_permalink(); ?>" class="p-4 h-[200px] h-full shadow-xl hover:scale-[0.97]  duration-200 transtion-all bg-[#222229] rounded-md w-full h-full justify-center items-center flex">
                     <?php the_post_thumbnail(); ?>                    
                   </a>
                 </div>

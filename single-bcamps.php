@@ -4,7 +4,7 @@ get_header();
 ?>
 
 <main class="container w-full flex justify-center items-center my-4 flex-col">
-    <div class="course-list grid grid-cols-6 w-[80%] gap-5">
+    <div class="course-list grid  min-[2400px]:grid-cols-8  min-[1700px]:grid-cols-6 min-[1000px]:grid-cols-4 min-[800px]:grid-cols-3 grid-cols-2 w-[80%] gap-5">
 <?php
 $course_id = get_the_ID(); 
 $course = get_post($course_id);

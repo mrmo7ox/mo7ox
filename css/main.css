@@ -5,7 +5,7 @@
 }
 body {
     background-color: #0C0C10;
-    background-color: white;
+    /* background-color: white; */
 }
 
 
@@ -104,9 +104,10 @@ align-items: center;
 
 #ctf_holder img
 {
+    scale: 0.9;
     border-radius: 10px;
-    height: 200px;
-    object-fit: cover;
+    height: 100%;
+    object-fit: fill;
 }
 #blog_holder img
 {
@@ -259,4 +260,19 @@ a.prev.page-numbers
 {
     color: white;
     background: #32323b;
+}
+
+
+
+
+@media screen and (width <= 48rem) 
+{
+    
+    #ctf_holder img
+{
+    scale: 0.9;
+    border-radius: 10px;
+    height: 100%;
+    object-fit: fill;
+}
 }

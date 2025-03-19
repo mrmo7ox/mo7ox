@@ -8,8 +8,8 @@
     </span>
 </div>
 
-<main class="container w-full flex justify-center items-center my-4 flex-col">
-    <div class="course-list grid grid-cols-6 w-[80%] gap-5">
+<main class="w-full flex justify-center items-center my-4 flex-col">
+    <div class="course-list grid min-[2400px]:grid-cols-8  min-[1700px]:grid-cols-6 min-[1000px]:grid-cols-4 min-[800px]:grid-cols-3 grid-cols-2 md:w-[80%] w-[90%] gap-5">
         <?php
         // Get the current page number
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
@@ -29,7 +29,7 @@
                     $title = substr($title, 0, 40) . '...';
                 }
         ?>
-                <div class="course-item">
+                <div class="course-item h-[200px]">
                     <a id="ctf_holder" href="<?php the_permalink(); ?>" class="h-[200px] h-full shadow-xl hover:scale-[0.97]  duration-200 transtion-all bg-[#222229] rounded-md w-full h-full justify-center items-center flex">
                     <?php the_post_thumbnail(); ?>                    
                   </a>
