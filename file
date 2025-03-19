@@ -1,0 +1,172 @@
+function mo7ox_register_Bcamps_post_type() {
+    // Bcamps Post Type
+    $labels_Bcamps = array(
+        'name'                  => _x('Bcamps', 'Post Type General Name', 'mo7ox'),
+        'singular_name'         => _x('Bcamp', 'Post Type Singular Name', 'mo7ox'),
+        'menu_name'             => __('Bcamps', 'mo7ox'),
+        'name_admin_bar'        => __('Bcamp', 'mo7ox'),
+        'add_new'               => __('Add New', 'mo7ox'),
+        'add_new_item'          => __('Add New Bcamp', 'mo7ox'),
+        'new_item'              => __('New Bcamp', 'mo7ox'),
+        'edit_item'             => __('Edit Bcamp', 'mo7ox'),
+        'view_item'             => __('View Bcamp', 'mo7ox'),
+        'all_items'             => __('All Bcamps', 'mo7ox'),
+        'search_items'          => __('Search Bcamps', 'mo7ox'),
+        'not_found'             => __('No Bcamps found', 'mo7ox'),
+        'not_found_in_trash'    => __('No Bcamps found in Trash', 'mo7ox'),
+    );
+
+    $args_Bcamps = array(
+        'label'                 => __('Bcamps', 'mo7ox'),
+        'description'           => __('Custom post type for Bcamps', 'mo7ox'),
+        'labels'                => $labels_Bcamps,
+        'supports'              => array('title', 'thumbnail'),
+        'public'                => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 7,
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => true,
+        'can_export'            => true,
+        'has_archive'           => true,
+        'hierarchical'          => false,
+        'exclude_from_search'   => false,
+        'capability_type'       => 'post',
+    );
+
+    register_post_type('Bcamps', $args_Bcamps);
+
+    // Bcamp Details Post Type
+    $labels_details = array(
+        'name'                  => _x('Bcamp Details', 'Post Type General Name', 'mo7ox'),
+        'singular_name'         => _x('Bcamp Detail', 'Post Type Singular Name', 'mo7ox'),
+        'menu_name'             => __('Bcamp Details', 'mo7ox'),
+        'name_admin_bar'        => __('Bcamp Detail', 'mo7ox'),
+        'add_new'               => __('Add New', 'mo7ox'),
+        'add_new_item'          => __('Add New Bcamp Detail', 'mo7ox'),
+        'new_item'              => __('New Bcamp Detail', 'mo7ox'),
+        'edit_item'             => __('Edit Bcamp Detail', 'mo7ox'),
+        'view_item'             => __('View Bcamp Detail', 'mo7ox'),
+        'all_items'             => __('All Bcamp Details', 'mo7ox'),
+        'search_items'          => __('Search Bcamp Details', 'mo7ox'),
+        'not_found'             => __('No Bcamp details found', 'mo7ox'),
+        'not_found_in_trash'    => __('No Bcamp details found in Trash', 'mo7ox'),
+    );
+
+    $args_details = array(
+        'label'                 => __('Bcamp Details', 'mo7ox'),
+        'description'           => __('Custom post type for Bcamp details', 'mo7ox'),
+        'labels'                => $labels_details,
+        'supports'              => array('title', 'editor', 'thumbnail'),
+        'public'                => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 8,
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => true,
+        'can_export'            => true,
+        'has_archive'           => true,
+        'hierarchical'          => false,
+        'exclude_from_search'   => false,
+        'capability_type'       => 'post',
+    );
+
+    register_post_type('Bcamp_details', $args_details);
+}
+add_action('init', 'mo7ox_register_Bcamps_post_type');
+
+
+// ----------------------
+// ADD Bcamp SELECTION FIELD TO Bcamp DETAILS
+// ----------------------
+function mo7ox_add_Bcamp_selection_metabox() {
+    add_meta_box(
+        'mo7ox_Bcamp_selection',
+        'Select Bcamp',
+        'mo7ox_Bcamp_selection_callback',
+        'Bcamp_details',
+        'side',
+        'default'
+    );
+}
+add_action('add_meta_boxes', 'mo7ox_add_Bcamp_selection_metabox');
+
+function mo7ox_Bcamp_selection_callback($post) {
+    $selected_Bcamp = get_post_meta($post->ID, '_mo7ox_selected_Bcamp', true);
+    $Bcamps = get_posts(array('post_type' => 'Bcamps', 'numberposts' => -1));
+
+    echo '<label for="mo7ox_selected_Bcamp">Select Bcamp:</label><br>';
+    echo '<select id="mo7ox_selected_Bcamp" name="mo7ox_selected_Bcamp">';
+    foreach ($Bcamps as $Bcamp) {
+        echo '<option value="' . $Bcamp->ID . '" ' . selected($selected_Bcamp, $Bcamp->ID, false) . '>' . esc_html($Bcamp->post_title) . '</option>';
+    }
+    echo '</select>';
+}
+
+function mo7ox_save_Bcamp_selection($post_id) {
+    if (isset($_POST['mo7ox_selected_Bcamp'])) {
+        update_post_meta($post_id, '_mo7ox_selected_Bcamp', sanitize_text_field($_POST['mo7ox_selected_Bcamp']));
+    }
+}
+add_action('save_post', 'mo7ox_save_Bcamp_selection');
+
+
+
+// 2️⃣ Add Custom Meta Boxes for Bcamp Details
+function mo7ox_add_Bcamp_details_meta_boxes() {
+
+    add_meta_box(
+        'mo7ox_Bcamp_selector',
+        __('Select Bcamp', 'mo7ox'),
+        'mo7ox_Bcamp_selector_callback',
+        'Bcamp_details',
+        'side',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'mo7ox_add_Bcamp_details_meta_boxes');
+// Callback for Bcamp Selector Meta Box
+function mo7ox_Bcamp_selector_callback($post) {
+    $Bcamps = get_posts(array('post_type' => 'Bcamps', 'numberposts' => -1));
+    $selected_Bcamp = get_post_meta($post->ID, '_mo7ox_selected_Bcamp', true);
+    ?>
+    <label for="mo7ox_selected_Bcamp"><?php _e('Select a Bcamp:', 'mo7ox'); ?></label>
+    <select id="mo7ox_selected_Bcamp" name="mo7ox_selected_Bcamp" style="width: 100%;">
+        <option value=""><?php _e('Select a Bcamp', 'mo7ox'); ?></option>
+        <?php foreach ($Bcamps as $Bcamp) : ?>
+            <option value="<?php echo esc_attr($Bcamp->ID); ?>" <?php selected($selected_Bcamp, $Bcamp->ID); ?>>
+                <?php echo esc_html($Bcamp->post_title); ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    <?php
+}
+
+function mo7ox_save_Bcamp_details_meta($post_id) {
+    if (array_key_exists('mo7ox_selected_Bcamp', $_POST)) {
+        update_post_meta($post_id, '_mo7ox_selected_Bcamp', sanitize_text_field($_POST['mo7ox_selected_Bcamp']));
+    }
+}
+add_action('save_post', 'mo7ox_save_Bcamp_details_meta');
+
+
+
+
+
+function mo7ox_get_ctf_details($course_id) {
+    $course_details = get_posts(array(
+        'post_type' => 'ctf_details',
+        'meta_query' => array(
+            array(
+                'key' => '_mo7ox_selected_ctf',
+                'value' => $course_id,
+                'compare' => '='
+            )
+        ),
+        'numberposts' => -1
+    ));
+
+    return $course_details; 
+}
+
+
+
+

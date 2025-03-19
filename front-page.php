@@ -32,20 +32,21 @@ if ($posts_query->have_posts()) {
     $count = 0;
 
     while ($posts_query->have_posts()) {
-        $posts_query->the_post(); // Set up post data for each post
+        $posts_query->the_post();
          $title = get_the_title(); 
               if (strlen($title) >= 40) {
                   $title = substr($title, 0, 40) . '...';
               } 
         $posts[$count] = array(
-            'title' => $title, // Get the title of the post
-            'img'   => get_the_post_thumbnail(), // Get the featured image of the post
+            'title' => $title,
+            'img'   => get_the_post_thumbnail(),
+            'link'  => get_the_permalink(), 
         );
         $count++;
     }
 ?>
 <div class="grid grid-cols-3 grid-rows-2 gap-4 w-[90%] h-full">
-    <a href="" id="post_fire" class="vissted:text-white row-span-2 relative">
+    <a href="<?php echo $posts[0]['link']; ?>" id="post_fire" class="vissted:text-white row-span-2 relative">
         <?php echo $posts[0]['img']; ?>
         <div class="absolute w-full h-full top-0 flex flex-col justify-center items-center" >
           <div class="w-[90%] h-[80%] text-start">
@@ -55,7 +56,7 @@ if ($posts_query->have_posts()) {
           </div>
         </div>
     </a>
-    <a href="" id="post_fire" class="vissted:text-white row-span-2 relative">
+    <a href="<?php echo $posts[1]['link']; ?>" id="post_fire" class="vissted:text-white row-span-2 relative">
         <?php echo $posts[1]['img']; ?>
         <div class="absolute w-full h-full top-0 flex flex-col justify-center items-center" >
           <div class="w-[90%] h-[80%] text-start">
@@ -65,7 +66,7 @@ if ($posts_query->have_posts()) {
           </div>
         </div>
     </a>
-    <a href="" id="post_fire" class="vissted:text-white relative">
+    <a href="<?php echo $posts[2]['link']; ?>" id="post_fire" class="vissted:text-white relative">
         <?php echo $posts[2]['img']; ?>
         <div class="absolute w-full h-full top-0 flex flex-col justify-center items-center" >
           <div class="w-[90%] h-[80%] text-start">
@@ -75,7 +76,7 @@ if ($posts_query->have_posts()) {
           </div>
         </div>
     </a>
-    <a href="" id="post_fire" class="vissted:text-white col-start-3 relative">
+    <a href="<?php echo $posts[3]['link']; ?>" id="post_fire" class="vissted:text-white col-start-3 relative">
         <?php echo $posts[3]['img']; ?>
         <div class="absolute w-full h-full top-0 flex flex-col justify-center items-center" >
           <div class="w-[90%] h-[80%] text-start">
@@ -127,7 +128,7 @@ wp_reset_postdata();
               ?>
             <div class="swiper-slide h-full">
               <?php if (has_post_thumbnail()) : ?>
-                <a href="" class="hover:scale-[0.97] duration-200 transtion-all course-thumbnail h-[80%] shadow-xl relative">
+                <a href="<?php echo the_permalink(); ?>" class="hover:scale-[0.97] duration-200 transtion-all course-thumbnail h-[80%] shadow-xl relative">
                   <?php the_post_thumbnail(); ?>
                   <div id="img_slider" class="absolute inset-0 bg-gradient-to-t from-[<?php echo esc_attr($color); ?>] to-transparent"></div>
                   <div id="slider_title" class="justify-center items-center top-0 Poppins w-full h-full  text-white absolute flex flex-col">
@@ -210,7 +211,7 @@ wp_reset_postdata();
             <?php while ($courses_query->have_posts()) : $courses_query->the_post(); ?>      
               <div class="h-[200px]">
                 <?php if (has_post_thumbnail()) : ?>
-                  <a id="ctf_holder" href="#" class="h-[200px] h-full shadow-xl hover:scale-[0.97]  duration-200 transtion-all bg-[#222229] rounded-md w-full h-full justify-center items-center flex">
+                  <a id="ctf_holder" href="<?php the_permalink(); ?>" class="h-[200px] h-full shadow-xl hover:scale-[0.97]  duration-200 transtion-all bg-[#222229] rounded-md w-full h-full justify-center items-center flex">
                     <?php the_post_thumbnail(); ?>                    
                   </a>
                 <?php endif; ?>
@@ -249,7 +250,7 @@ wp_reset_postdata();
             <?php while ($courses_query->have_posts()) : $courses_query->the_post(); ?>      
               <div class="h-full">
                 <?php if (has_post_thumbnail()) : ?>
-                  <a id="tool_holder" href="#" class="h-full shadow-xl hover:scale-[0.97]  duration-200 transtion-all bg-[#222229] rounded-md w-full h-full justify-center items-center flex">
+                  <a id="tool_holder" href="<?php the_permalink(); ?>" class="h-full shadow-xl hover:scale-[0.97]  duration-200 transtion-all bg-[#222229] rounded-md w-full h-full justify-center items-center flex">
                     <?php the_post_thumbnail(); ?>                    
                   </a>
                 <?php endif; ?>
